@@ -1,0 +1,54 @@
+<div class="row mb-3 g-3">
+  <ng-container *ngIf="pokemonsAll && pokemonsAll.results && pokemonsAll.results.length>0"; else noPokemons>
+   <div class="col-3" *ngFor="let pokemon of pokemonsAll.results">
+       <div class="card fixed-card">
+           <div *ngIf="!CargaImagen">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 120 120">
+              <g>
+                <circle cx="60" cy="60" r="50" fill="#ffffff" stroke="#000" stroke-width="5" />
+                <path d="M10 60a50 50 0 0 1 100 0" fill="#FFA500" stroke="#000" stroke-width="5" />
+                <circle cx="60" cy="60" r="10" fill="#ffffff" stroke="#000" stroke-width="5">
+                  <animate attributeName="fill" values="#ffffff; #ffff00; #ffffff" dur="1s" repeatCount="indefinite" />
+                </circle>
+              </g>
+              <animateTransform 
+                attributeName="transform" 
+                type="rotate" 
+                from="0 60 60" 
+                to="360 60 60" 
+                dur="1.5s" 
+                repeatCount="indefinite" />
+            </svg>
+            
+            
+            
+            
+              
+           </div>
+           
+           <img 
+           [src]="pokemon.data?.sprites?.versions?.['generation-v']?.['black-white']?.animated?.front_default" 
+               class="card-img-top fixed-img" 
+               alt="..."
+               loading="lazy"
+               (load)="CargaImagen=true"
+           >
+
+           <div class="card-body fixed-body">
+           <h5 class="card-title">{{pokemon.name}}</h5>
+           <p class="card-text">{{pokemon.data?.base_experience}}</p>
+           <li class="btn btn-outline-primary" (click)="openModal(pokemon.data!)">Mas Informacion</li>
+           </div>
+       </div>
+   </div>
+  </ng-container>
+  <ng-template #noPokemons>
+   <div class="col-12">
+       <div class="alert alert-warning" role="alert">
+           No se han encontrado Pokemons
+       </div>
+   </div>
+  </ng-template>
+</div>
+
+<pokemon-modal/>
