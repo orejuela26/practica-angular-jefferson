@@ -1,0 +1,38 @@
+<div class="modal fade" #modalElement tabindex="-1" aria-labelledby="rickModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="rickModalLabel">Detalles de {{ rick?.name | titlecase }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body" *ngIf="rick">
+          <div class="row">
+            <div class="col-md-6 text-center">
+              <img [src]="rick?.image || '#'" [alt]="rick?.name" class="img-fluid mb-3 rounded">
+              <p><strong>ID:</strong> {{ rick?.id }}</p>
+              <p><strong>Género:</strong> {{ rick?.gender }}</p>
+              <p><strong>Estado:</strong> {{ rick?.status }}</p>
+              <p><strong>Especie:</strong> {{ rick?.species }}</p>
+              <p><strong>Tipo:</strong> {{ rick?.type || 'N/A' }}</p>
+            </div>
+            <div class="col-md-6">
+              <h6>Origen:</h6>
+              <p>{{ rick?.origin?.name }}</p>
+              <h6>Ubicación actual:</h6>
+              <p>{{ rick?.location?.name }}</p>
+              <h6>Episodios:</h6>
+              <ul class="list-unstyled">
+                <li *ngFor="let ep of rick?.episode">
+                  {{ ep }}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
